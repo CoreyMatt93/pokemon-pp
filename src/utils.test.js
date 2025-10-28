@@ -100,16 +100,19 @@ describe("getStrongestPokemon", () => {
 
   test("should return all of the Pokémon with the highest attack including multiple in case of tie", () => {
     // Act
-    // Call the function with INPUT to get the strongest Pokémon
     const result = getStrongestPokemon(INPUT);
 
     // Assert
-    // .toContain() checks if result.name is in the array ["Pikachu", "Eevee"]
-    // This ensures the function returns one of the Pokémon with the highest attack even including ties
-    expect(["Pikachu", "Eevee"]).toContain(result.name);
+    // result is an array, so we check that it contains Pokémon with the correct names
+    const resultNames = result.map((pokemon) => pokemon.name);
 
-    // Verify the attack value of the returned Pokémon is correct (55)
-    expect(result.attack).toBe(55);
+    // Check that both Pikachu and Eevee are included
+    expect(resultNames).toEqual(expect.arrayContaining(["Pikachu", "Eevee"]));
+
+    // Verify all returned Pokémon have the correct attack value
+    result.forEach((pokemon) => {
+      expect(pokemon.attack).toBe(55);
+    });
   });
 });
 

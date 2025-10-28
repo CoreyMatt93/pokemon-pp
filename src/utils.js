@@ -11,21 +11,16 @@ export const getPokemonNames = (pokemonList) => {
   return pokemonList.map((pokemon) => pokemon.name);
 };
 
-// getStrongestPokemon: finds the Pokémon with the highest attack value
+// getStrongestPokemon: finds all Pokémon with the highest attack value
 export const getStrongestPokemon = (pokemonList) => {
-  // Start by assuming the first Pokémon is the strongest
-  let strongest = pokemonList[0];
+  // Sort the list by attack in descending order
+  const sortedByAttack = [...pokemonList].sort((a, b) => b.attack - a.attack);
 
-  // Go through the rest of the Pokémon one by one
-  for (let i = 1; i < pokemonList.length; i++) {
-    // If this Pokémon’s attack is higher, it becomes the new strongest
-    if (pokemonList[i].attack > strongest.attack) {
-      strongest = pokemonList[i];
-    }
-  }
+  // Get the highest attack value
+  const highestAttack = sortedByAttack[0].attack;
 
-  // After checking them all, return the one with the most attack
-  return strongest;
+  // Return all Pokémon that have the highest attack
+  return sortedByAttack.filter((pokemon) => pokemon.attack === highestAttack);
 };
 
 // sortByName: returns a new list of Pokémon sorted alphabetically by name
