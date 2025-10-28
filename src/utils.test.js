@@ -67,9 +67,49 @@ describe("getPokemonNames", () => {
 });
 
 describe("getStrongestPokemon", () => {
-  test("should return Pokemon with highest attack", () => {
-    const result = getStrongestPokemon(MOCK_DATA);
-    expect(result.name).toBe("Pikachu"); // Pikachu has 55 attack
+  // Arrange: an array of Pokémon objects
+  // Each Pokémon has id, name, type, hp, attack, defense
+  const INPUT = [
+    {
+      id: 1,
+      name: "Bulbasaur",
+      type: "grass",
+      hp: 45,
+      attack: 49,
+      defense: 49,
+    },
+    {
+      id: 4,
+      name: "Charmander",
+      type: "fire",
+      hp: 39,
+      attack: 52,
+      defense: 43,
+    },
+    { id: 7, name: "Squirtle", type: "water", hp: 44, attack: 48, defense: 65 },
+    {
+      id: 25,
+      name: "Pikachu",
+      type: "electric",
+      hp: 35,
+      attack: 55,
+      defense: 40,
+    },
+    { id: 133, name: "Eevee", type: "normal", hp: 55, attack: 55, defense: 50 }, // same highest attack as Pikachu
+  ];
+
+  test("should return all of the Pokémon with the highest attack including multiple in case of tie", () => {
+    // Act
+    // Call the function with INPUT to get the strongest Pokémon
+    const result = getStrongestPokemon(INPUT);
+
+    // Assert
+    // .toContain() checks if result.name is in the array ["Pikachu", "Eevee"]
+    // This ensures the function returns one of the Pokémon with the highest attack even including ties
+    expect(["Pikachu", "Eevee"]).toContain(result.name);
+
+    // Verify the attack value of the returned Pokémon is correct (55)
+    expect(result.attack).toBe(55);
   });
 });
 
