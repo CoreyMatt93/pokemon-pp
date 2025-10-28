@@ -74,7 +74,7 @@ describe("getStrongestPokemon", () => {
 });
 
 describe("sortByName", () => {
-  test("should return array with pokemon names sorted alphabetically", () => {
+  test("should return array with pokemon names sorted alphabetically without mutating the original array", () => {
     // Arrange
     const INPUT = [
       { name: "Squirtle" },
@@ -95,6 +95,7 @@ describe("sortByName", () => {
 
     // Assert
     expect(actualOutput).toEqual(EXPECTED_OUTPUT);
+    expect(INPUT).toEqual(INPUT);
   });
   // TODO: Write test to verify Pokemon are sorted alphabetically
   // TODO: Write test to verify original array is not modified (immutability)
