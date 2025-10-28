@@ -74,6 +74,28 @@ describe("getStrongestPokemon", () => {
 });
 
 describe("sortByName", () => {
+  test("should return array with pokemon names sorted alphabetically", () => {
+    // Arrange
+    const INPUT = [
+      { name: "Squirtle" },
+      { name: "Bulbasaur" },
+      { name: "Pikachu" },
+      { name: "Charmander" },
+    ];
+
+    const EXPECTED_OUTPUT = [
+      { name: "Bulbasaur" },
+      { name: "Charmander" },
+      { name: "Pikachu" },
+      { name: "Squirtle" },
+    ];
+
+    // Act
+    const actualOutput = sortByName(INPUT);
+
+    // Assert
+    expect(actualOutput).toEqual(EXPECTED_OUTPUT);
+  });
   // TODO: Write test to verify Pokemon are sorted alphabetically
   // TODO: Write test to verify original array is not modified (immutability)
 });
